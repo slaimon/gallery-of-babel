@@ -1,0 +1,35 @@
+#document {
+    background-color: rgb(0, 9, 63);
+    color: #ededf0;
+}
+textarea {
+    background-color: rgb(0, 9, 63);
+    color: #ededf0;
+}
+.canvasCaption {
+    font-family: monospace;
+    margin: 16px 0;
+}
+
+#mainRenderer {
+    max-width: 512px;
+    max-height: 512px;
+    width: 90vw;
+    height: 90vw;
+}
+
+#mainContainer {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+#galleryContainer {
+    width: 600px;
+}
+#sideContainer {
+    min-width: 400px;
+    width: 25vw;
+}

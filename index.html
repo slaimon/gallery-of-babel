@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./base.css">
+    <title>The Gallery of Babel</title>
+</head>
+<body id="document">
+    <div id="mainContainer">
+        <div id="sideContainer" class="subContainer">
+            <div id="aboutBlock">
+                <h2>About this page</h2>
+                <p>Welcome to the Gallery of Babel. Here you can browse 2^32 different artworks, created in real time by your GPU.
+                </p>
+            </div>
+            <div id="genomeBlock">
+                <p>&nbsp;</p>
+                <textarea name="genome viewer" id="genomeViewer"></textarea>
+                <p>&nbsp;</p>
+            </div>
+        </div>
+        <div id="galleryContainer" class="subContainer">
+            <div id="canvasBlock">
+                <canvas id="mainRenderer"></canvas>
+            </div>
+            <div id="controlBlock">
+                <textarea id="nameArea"></textarea>
+                <p id="sizeCaption" class="canvasCaption">&nbsp</p>
+                <p id="performanceCaption" class="canvasCaption">&nbsp</p>
+                <input type="button" id="prevImageButton" value="<<">
+                <input type="button" id="nextImageButton" value=">>">
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module">
+    import {copyGlslSource, saveGlslSource,
+            paintNext, paintPrev, savePicture} from "./main.js"
+    
+    document.getElementById("prevImageButton").addEventListener("click", paintPrev);
+    document.getElementById("nextImageButton").addEventListener("click", paintNext);
+
+    onload = paintNext;
+    
+    /*
+    document.addEventListener("submit", submitJob);
+    document.getElementById("copySourceButton").addEventListener("click", copyGlslSource);
+    document.getElementById("downloadSourceButton").addEventListener("click", saveGlslSource);
+    document.getElementById("saveImageButton").addEventListener("click", savePicture);
+    */
+</script>
+</html>
