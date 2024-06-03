@@ -72,54 +72,54 @@ var defaultState = [defaultSeed(), 0];
 // se k<s.length, allora taglia s
 // altrimenti restituisce s+'aaaaa...'
 function pad(k, s) {
-var n = s.length;
-if (n <= k)
-   return s + 'a'.repeat(k - n);
-else
-   return s.slice(n - k);
+   var n = s.length;
+   if (n <= k)
+      return s + 'a'.repeat(k - n);
+   else
+      return s.slice(n - k);
 };
 
 function state_full_init(s, seed) {
-function combine(accu, x) {
-     return pad(16, accu + x.toString() );
-};
-function extract(d) {
-    return d.charCodeAt(0) + (d.charCodeAt(1) << 8) + (d.charCodeAt(2) << 16) ^ d.charCodeAt(3) << 22;
-  }
-var l = seed.length;
-for (var i = 0; i <= 54; i++) s[0][i] = i;
-var accu = "x";
-for (var i = 0; i <= 54 + Math.max(55, l); i++) {
-   var j = i % 55;
-   var k = i % l;
-   accu = combine(accu, seed[k]);
-   s[0][j] = s[0][j] ^ extract(accu);
-}
-return s[1] = 0;
+   function combine(accu, x) {
+      return pad(16, accu + x.toString() );
+   };
+   function extract(d) {
+      return d.charCodeAt(0) + (d.charCodeAt(1) << 8) + (d.charCodeAt(2) << 16) ^ d.charCodeAt(3) << 22;
+   }
+   var l = seed.length;
+   for (var i = 0; i <= 54; i++) s[0][i] = i;
+   var accu = "x";
+   for (var i = 0; i <= 54 + Math.max(55, l); i++) {
+      var j = i % 55;
+      var k = i % l;
+      accu = combine(accu, seed[k]);
+      s[0][j] = s[0][j] ^ extract(accu);
+   }
+   return s[1] = 0;
 };
 
 function state_bits(s) {
-s[1] = (s[1] + 1) % 55;
-var newval = s[0][(s[1] + 24) % 55] + s[0][s[1]] & 1073741823;
-s[0][s[1]] = newval;
-return newval;
+   s[1] = (s[1] + 1) % 55;
+   var newval = s[0][(s[1] + 24) % 55] + s[0][s[1]] & 1073741823;
+   s[0][s[1]] = newval;
+   return newval;
 };
 function state_intaux(s, n) {
-var r = state_bits(s);
-var v = r % n;
-if (r - v > 1073741823 - n + 1) return state_intaux(s, n);
-return v;
+   var r = state_bits(s);
+   var v = r % n;
+   if (r - v > 1073741823 - n + 1) return state_intaux(s, n);
+   return v;
 };
 function state_int(s, bound) {
-if (bound > 1073741823 || bound <= 0) { throw new Error("random.state_int: invalid input " + bound); }
-return state_intaux(s, bound);
+   if (bound > 1073741823 || bound <= 0) { throw new Error("random.state_int: invalid input " + bound); }
+   return state_intaux(s, bound);
 };
 function rawfloat(s) {
-var scale = 1073741824.0;
-var r0 = state_bits(s);
-var r1 = state_bits(s);
-var r2 = state_bits(s);
-return ((r0 / scale + r1) / scale + r2) / scale;
+   var scale = 1073741824.0;
+   var r0 = state_bits(s);
+   var r1 = state_bits(s);
+   var r2 = state_bits(s);
+   return ((r0 / scale + r1) / scale + r2) / scale;
 };
 function state_float(s, bound) { return rawfloat(s) * bound; };
 

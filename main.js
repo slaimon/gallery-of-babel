@@ -3,6 +3,7 @@ export {paintNext, paintPrev, copyGlslSource, saveGlslSource, savePicture}
 import {webglRenderFrag} from "./webgl.js"
 import * as compute from "./artgen/compute.js"
 import * as glsl from "./artgen/glsl/glsl.js"
+import { makeGraph } from "./graph.js"
 
 import { ReversibleGenerator } from "./random.js"
 const time = Date.now();
@@ -11,7 +12,6 @@ const random = new ReversibleGenerator(BigInt(time));
 const webglCanvasPerformance = document.getElementById("performanceCaption");
 const nameElement = document.getElementById("nameArea");
 const sizeElement = document.getElementById("sizeCaption");
-const genomeViewer = document.getElementById("genomeViewer");
 
 async function paint(seed) {
     const webglStart = performance.now();
@@ -20,9 +20,9 @@ async function paint(seed) {
     const picture = compute.random_picture(size, seed);
     nameElement.innerHTML = seed;
     sizeElement.innerHTML = `complexity: ${size}`;
-    genomeViewer.innerHTML = picture.gene_listing;
-    const shader = glsl.create_shader(picture);
 
+    const shader = glsl.create_shader(picture);
+    makeGraph(picture.gene_listing);
     var canvas = document.getElementById("mainRenderer");
     webglRenderFrag(shader, canvas);
 
