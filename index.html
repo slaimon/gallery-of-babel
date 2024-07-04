@@ -8,25 +8,27 @@
 </head>
 <body id="document">
     <div id="mainContainer">
-        <div id="sideContainer" class="subContainer">
-            <div id="aboutBlock">
-                <h2>About this page</h2>
-                <p>Welcome to the Gallery of Babel. Here you can browse 2^32 different artworks, created in real time by your GPU.
-                </p>
+        <div id="galleryWrapper">
+            <div id="sideContainer" class="subContainer">
+                <div id="aboutBlock">
+                    <h2>About this page</h2>
+                    <p>Welcome to the Gallery of Babel. Here you can browse 2^32 different artworks, created in real time by your GPU.
+                    </p>
+                </div>
+                <div id="simulationContainer">
+                </div>
             </div>
-            <div id="simulationContainer">
-            </div>
-        </div>
-        <div id="galleryContainer" class="subContainer">
-            <div id="canvasBlock">
-                <canvas id="mainRenderer"></canvas>
-            </div>
-            <div id="controlBlock">
-                <textarea id="nameArea"></textarea>
-                <p id="sizeCaption" class="canvasCaption">&nbsp</p>
-                <p id="performanceCaption" class="canvasCaption">&nbsp</p>
-                <input type="button" id="prevImageButton" value="<<">
-                <input type="button" id="nextImageButton" value=">>">
+            <div id="galleryContainer" class="subContainer">
+                <div id="canvasBlock">
+                    <canvas id="mainRenderer"></canvas>
+                </div>
+                <div id="controlBlock">
+                    <textarea id="nameArea"></textarea>
+                    <p id="sizeCaption" class="canvasCaption">&nbsp</p>
+                    <p id="performanceCaption" class="canvasCaption">&nbsp</p>
+                    <input type="button" id="prevImageButton" value="<<">
+                    <input type="button" id="nextImageButton" value=">>">
+                </div>
             </div>
         </div>
     </div>
